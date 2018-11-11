@@ -12,26 +12,11 @@ class App extends Component {
     showPersons: false
   }
 
-  switchNameHandler=(newName)=>{
-    // console.log('Hello: switchNameHandler!');
-    // Don't DO THIS: this.state.persons[0].name = 'Maximilian' !!!;
-    this.setState({
-      persons : [
-        {name: newName, age: 127},
-        {name: 'ManuScript', age: 129},
-        {name: 'StepANY', age: 126}
-      ]
-    })
-  }
-
-  nameChangedHandler=(event)=>{
-    this.setState({
-      persons : [
-        {name: 'Maximilian', age: 27},
-        {name: event.target.value, age: 29},
-        {name: 'StepANY', age: 26}
-      ]
-    })
+  deletePersonsHandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex,1);
+    this.setState({persons: persons});
+    console.log("Worked!");
   }
 
   togglePersonsHandler = () => {
@@ -49,16 +34,19 @@ class App extends Component {
       cursor: 'pointer'
     }
 
-    let persons = null;
+    let person = null;
 
     if (this.state.showPersons) {
       
-      persons = (
+      person = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((item,index) => {
             return <Person 
-            name={person.name} 
-            age={person.age}/>
+            // the same as below:
+            //click={() => this.deletePersonsHandler(index)}
+            click={this.deletePersonsHandler.bind(this,index)}
+            name={item.name} 
+            age={item.age}/>
           })}
         </div>
       );
@@ -72,7 +60,7 @@ class App extends Component {
         onClick={() => this.togglePersonsHandler()}>
           Show/Hide persons
         </button>
-        {persons}
+        {person}
       </div>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Hi I\'m a React App!!!'));
