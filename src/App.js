@@ -20,6 +20,21 @@ class App extends Component {
     console.log("Worked!");
   }
 
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(person => {
+      return person.id === id;
+    });
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    //alternative:
+    //const person = Object.assign({},this.state.persons[personIndex])
+    person.name = event.target.value;
+    const persons = [...this.state.persons];
+    persons[personIndex]=person;
+    this.setState({persons: persons});
+  }
+
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
@@ -46,6 +61,8 @@ class App extends Component {
             // the same as below:
             //click={() => this.deletePersonsHandler(index)}
             click={this.deletePersonsHandler.bind(this,index)}
+            //changed={this.nameChangedHandler.bind(this,item.id)}
+            changed={(event) => this.nameChangedHandler(event,item.id)}
             name={item.name} 
             age={item.age}
             key={item.id}
