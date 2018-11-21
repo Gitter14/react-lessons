@@ -17,7 +17,6 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons.splice(personIndex,1);
     this.setState({persons: persons});
-    console.log("Worked!");
   }
 
   nameChangedHandler = (event, id) => {
@@ -56,16 +55,16 @@ class App extends Component {
       
       person = (
         <div>
-          {this.state.persons.map((item,index) => {
+          {this.state.persons.map((person,index) => {
             return <Person
             // the same as below:
             //click={() => this.deletePersonsHandler(index)}
             click={this.deletePersonsHandler.bind(this,index)}
-            //changed={this.nameChangedHandler.bind(this,item.id)}
-            changed={(event) => this.nameChangedHandler(event,item.id)}
-            name={item.name} 
-            age={item.age}
-            key={item.id}
+            //changed={this.nameChangedHandler.bind(this,person.id)}
+            changed={(event) => this.nameChangedHandler(event,person.id)}
+            name={person.name} 
+            age={person.age}
+            key={person.id}
             />
           })}
         </div>
