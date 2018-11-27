@@ -5,7 +5,7 @@ import './Person.css';
 const person = (props) => {
 
     const styles = {
-        '@media min-width: 500px': {
+        '@media (min-width: 500px)': {
             width: '450px'
         }
     }
