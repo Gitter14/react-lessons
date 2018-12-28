@@ -16,7 +16,8 @@ constructor (props) {
       {id: 'feay1', name: 'Manu', age: 29},
       {id: 'feay34', name: 'Stephany', age: 26}
     ],
-    showPersons: false    
+    showPersons: false,
+    toggleClicked: 0   
   }
 }
 
@@ -66,7 +67,12 @@ componentDidUpdate(){
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState((prevState) => {
+      return {
+        showPersons: !doesShow, 
+        toggleClicked: prevState.toggleClicked+1
+      }
+    });
   }
 
   render() {
